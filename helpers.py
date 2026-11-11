@@ -7,10 +7,30 @@ from matplotlib.animation import FuncAnimation
 import gymnasium as gym
 from gymnasium.wrappers import RecordVideo, RescaleAction, ClipAction
 
-def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
-    nn.init.orthogonal_(layer.weight, gain=std)
-    nn.init.constant_(layer.bias, bias_const)
-    return layer
+def get_game(game_code):
+    if game_code == "ll":
+        game = "LunarLander-v3"
+        action_labels = ["None", "Left", "Main", "Right"]
+    elif game_code == "llcont":
+        game = "LunarLanderContinuous-v3"
+        action_labels = ["Main", "Side"]
+    elif game_code == "walk":
+        game = "Walker2d-v5"
+        action_labels = ["r_thigh", "r_leg", "r_foot", "l_thigh", "l_leg", "l_foot"]
+    elif game_code == "bw":
+        game = "BipedalWalker-v3"
+        action_labels = ["0", "1", "2", "3"]
+    elif game_code == "chee":
+        game = "HalfCheetah-v5"
+        action_labels = ["bthigh", "bshin", "bfoot", "fthigh", "fshin", "ffoot"]
+    elif game_code == "human":
+        game = "Humanoid-v5"
+        action_labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+    else:
+        raise ValueError("Invalid game code")
+    
+    print(f"{game} selected")
+    return game, action_labels
 
 def save_weights(model, name):
     # Save only the weights (state_dict) to a .pt file
@@ -183,28 +203,3 @@ def record_video(model, game, device, save_name, step):
 
     print(f"Video saved! Evaluation reward: {eval_reward:.2f}")  
     return eval_reward
-
-def get_game(game_code):
-    if game_code == "ll":
-        game = "LunarLander-v3"
-        action_labels = ["None", "Left", "Main", "Right"]
-    elif game_code == "llcont":
-        game = "LunarLanderContinuous-v3"
-        action_labels = ["Main", "Side"]
-    elif game_code == "walk":
-        game = "Walker2d-v5"
-        action_labels = ["r_thigh", "r_leg", "r_foot", "l_thigh", "l_leg", "l_foot"]
-    elif game_code == "bw":
-        game = "BipedalWalker-v3"
-        action_labels = ["0", "1", "2", "3"]
-    elif game_code == "chee":
-        game = "HalfCheetah-v5"
-        action_labels = ["bthigh", "bshin", "bfoot", "fthigh", "fshin", "ffoot"]
-    elif game_code == "human":
-        game = "Humanoid-v5"
-        action_labels = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
-    else:
-        raise ValueError("Invalid game code")
-    
-    print(f"{game} selected")
-    return game, action_labels
