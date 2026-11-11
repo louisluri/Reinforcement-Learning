@@ -16,7 +16,8 @@ from collections import deque
 import copy
 import random
 import numpy as np
-from model import SAC, SAC_Actor, SAC_TC, save_weights, save_metrics, get_game, record_video
+from sac_model import SAC, SAC_Actor, SAC_TC
+from helpers import save_weights, save_metrics, get_game, record_video
 
 device = torch.device("cuda:1")
 
@@ -47,7 +48,7 @@ env = gym.make(game, render_mode=None)
 
 assert isinstance(env.action_space, gym.spaces.Box), "Action Space is not continuous"
 
-model_layers = [env.observation_space.shape[0], hidden, hidden, env.action_space.shape[0]]  # input size, hidden layers, output size
+model_layers = [env.observation_space.shape[0], hidden, hidden, env.action_space.shape[0]]  # input size, hidden states, output size
 
 m = SAC_Actor(model_layers).to(device)
 c = SAC_TC(model_layers).to(device)

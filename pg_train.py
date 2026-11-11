@@ -17,7 +17,8 @@ import torch
 from torch.distributions import Categorical
 import torch.nn.functional as F
 import torch.optim as optim
-from model import PG, save_weights, save_metrics, get_game
+from pg_model import PG
+from helpers import save_weights, save_metrics, get_game
 
 device = torch.device("cuda:1")
         
@@ -37,7 +38,7 @@ env = gym.make(game, render_mode=None)
 
 assert isinstance(env.action_space, gym.spaces.Discrete), "Action Space is not discrete"
 
-model_layers = [env.observation_space.shape[0], 64, 64, env.action_space.n]  # input size, hidden layers, output size
+model_layers = [env.observation_space.shape[0], 64, 64, env.action_space.n]  # input size, hidden states, output size
 
 m = PG(model_layers).to(device)
 

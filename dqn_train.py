@@ -6,7 +6,8 @@ from collections import deque
 import copy
 import random
 import numpy as np
-from model import DQN, save_weights, save_metrics, get_game
+from dqn_model import DQN
+from helpers import save_weights, save_metrics, get_game
 
 device = torch.device("cuda:1")
 
@@ -41,7 +42,7 @@ env = gym.make(game, render_mode=None)
 
 assert isinstance(env.action_space, gym.spaces.Discrete), "Action Space is not discrete"
 
-model_layers = [env.observation_space.shape[0], 64, 64, env.action_space.n]  # input size, hidden layers, output size
+model_layers = [env.observation_space.shape[0], 64, 64, env.action_space.n]  # input size, hidden states, output size
 
 m = DQN(model_layers).to(device)
 target_m = copy.deepcopy(m).to(device)

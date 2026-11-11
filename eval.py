@@ -3,7 +3,11 @@ from gymnasium.wrappers import RescaleAction, ClipAction
 import numpy as np
 import torch 
 import os
-from model import DQN, PG, PPO, SAC, eval, live_dashboard, get_game
+from pg_model import PG
+from dqn_model import DQN
+from ppo_model import PPO
+from sac_model import SAC
+from helpers import eval, live_dashboard, get_game
 
 device = torch.device("cuda:1")
 

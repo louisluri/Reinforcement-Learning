@@ -7,7 +7,8 @@ from torch.distributions import Normal, Categorical
 import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
-from model import PPO, save_weights, save_metrics, save_norms, get_game
+from ppo_model import PPO
+from helpers import save_weights, save_metrics, save_norms, get_game
 
 device = torch.device("cuda:1")
     
