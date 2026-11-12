@@ -4,7 +4,7 @@ This is the code I wrote while learning RL, it implements 4 models of increasing
 Using OpenAI Gymnasium for the environments, and its able to save your trained models and load and use them for inference
 
 
-# Layout
+## Layout
 
 "grid.py" is the first project, it is a simple grid based environment and it showcases the foundations of Reinforcement Learning and Markov Decision Process (MDP).
 It showcases 4 methods of learning ("Monte Carlo", "SARSA", "Expected SARSA", "Q-learning") which can even be run in parallel to watch them compete in real time.
@@ -27,8 +27,8 @@ Can show a dashboard with the gameplay, or can be used with no dashboard to spee
 "helpers.py" Holds all the functions that are used in multiple files across the codebase.
 
 
-# Requires
+## Requires
 
-pytorch
-gymnasium
-matplotlib
+- pytorch
+- gymnasium
+- matplotlib
